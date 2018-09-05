@@ -1,19 +1,16 @@
 import React from 'react';
-import styles from './index.css';
-import Header from './Header';
 import withRouter from 'umi/withRouter';
+import {LocaleProvider} from 'antd'
+import zhCN from 'antd/lib/locale-provider/zh_CN';
+import App from './App'
 
-function Layout({ children, location }) {
+export default withRouter((props) => {
   return (
-    <div className={styles.normal}>
-      <Header location={location} />
-      <div className={styles.content}>
-        <div className={styles.main}>
-          {children}
-        </div>
-      </div>
-    </div>
-  );
-}
+    <LocaleProvider locale={zhCN}>
+      <App>
+        {props.children}
+      </App>
+    </LocaleProvider>
+  )
+})
 
-export default withRouter(Layout);
