@@ -2,9 +2,12 @@ import React from 'react'
 import {Button, Icon, Layout} from 'antd';
 import Menus from './Menus'
 import Headers from "./Headers";
+import Bread from "./Bread";
+import withRouter from 'umi/withRouter';
+import {connect} from 'dva'
 
-const {Header, Content, Footer, Sider} = Layout;
-const App = ({children}) => {
+const {Header, Content, Sider} = Layout;
+const App = ({children, location}) => {
 
   return (
     <Layout>
@@ -16,6 +19,7 @@ const App = ({children}) => {
           <Menus/>
         </Sider>
         <Content style={{padding: '24px', minHeight: 280}}>
+          <Bread location={location}/>
           {children}
         </Content>
       </Layout>
@@ -26,4 +30,4 @@ const App = ({children}) => {
 
 };
 
-export default App;
+export default withRouter(connect(({app, loading}) => ({app, loading}))(App));

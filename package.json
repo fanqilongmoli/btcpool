@@ -7,10 +7,12 @@
     "precommit": "npm run lint"
   },
   "dependencies": {
-    "umi": "^2.0.0",
-    "umi-plugin-react": "^1.0.0",
+    "@antv/data-set": "^0.9.5",
+    "bizcharts": "^3.2.2",
+    "dva": "^2.4.0",
     "mockjs": "^1.0.1-beta3",
-    "dva": "^2.4.0"
+    "umi": "^2.0.0",
+    "umi-plugin-react": "^1.0.0"
   },
   "devDependencies": {
     "eslint": "^4.14.0",

@@ -1,9 +1,10 @@
-import React from 'react'
+import React from 'react';
+import Dashboard from './components/dashboard'
 
 export default () => {
   return (
     <div>
-      总状态预览
+      <Dashboard/>
     </div>
   )
 }
