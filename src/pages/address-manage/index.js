@@ -1,9 +1,10 @@
 import React from 'react'
+import AddressManage from "./components/AddressManage";
 
 export default () => {
   return (
     <div>
-      地址管理
+      <AddressManage/>
     </div>
   )
 }
