@@ -36,7 +36,7 @@ const Login = ({
         <span>登入你的账号</span>
       </div>
       <Form>
-        <Form.Item hasFeedback>
+        <Form.Item>
           {getFieldDecorator('account', {
             rules: [
               {
@@ -46,7 +46,7 @@ const Login = ({
             ],
           })(<Input onPressEnter={handleEnter} placeholder="用户名" autoComplete="off" disableautocomplete="true"/>)}
         </Form.Item>
-        <Form.Item hasFeedback>
+        <Form.Item>
           {getFieldDecorator('password', {
             rules: [
               {
