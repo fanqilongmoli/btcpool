@@ -3,7 +3,9 @@ export default {
 
   namespace: 'app',
 
-  state: {},
+  state: {
+    selectedKeys:'1',
+  },
 
   subscriptions: {
     setup({ dispatch, history }) {
@@ -15,7 +17,12 @@ export default {
   },
 
   reducers: {
-
+    updateState(state, {payload}) {
+      return {
+        ...state,
+        ...payload,
+      }
+    },
   },
 
 };

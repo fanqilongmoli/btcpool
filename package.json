@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@antv/data-set": "^0.9.5",
+    "axios": "^0.18.0",
     "babel-eslint": "^7.2.3",
     "bizcharts": "^3.2.2",
     "dva": "^2.4.0",
