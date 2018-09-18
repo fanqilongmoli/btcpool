@@ -18,7 +18,7 @@ const Login = ({
       if (error) {
         return
       }
-      dispatch({type: 'login/login', payload: values})
+      dispatch({type: 'login/login', payload: values}).then(value => {router.push('/dashboard')})
     })
   };
 
@@ -37,7 +37,7 @@ const Login = ({
       </div>
       <Form>
         <Form.Item>
-          {getFieldDecorator('account', {
+          {getFieldDecorator('username', {
             rules: [
               {
                 required: true,

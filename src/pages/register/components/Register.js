@@ -31,16 +31,16 @@ class Register extends React.PureComponent {
   };
 
   componentDidUpdate() {
-    const {form, register} = this.props;
-    const account = form.getFieldValue('mail');
-    if (register.status === 'ok') {
-      router.push({
-        pathname: '/user/register-result',
-        state: {
-          account,
-        },
-      });
-    }
+    // const {form, register} = this.props;
+    // const account = form.getFieldValue('mail');
+    // if (register.status === 'ok') {
+    //   router.push({
+    //     pathname: '/user/register-result',
+    //     state: {
+    //       account,
+    //     },
+    //   });
+    // }
   }
 
   componentWillUnmount() {
@@ -48,15 +48,29 @@ class Register extends React.PureComponent {
   }
 
   onGetCaptcha = () => {
-    let count = 59;
-    this.setState({count});
-    this.interval = setInterval(() => {
-      count -= 1;
-      this.setState({count});
-      if (count === 0) {
-        clearInterval(this.interval);
+    const {form, dispatch} = this.props;
+    form.validateFields(['mobile'], (errors, values) => {
+      console.log('values', values);
+      if (!errors) {
+        dispatch({
+          type: 'register/sms',
+          payload: values
+        }).then(value => {
+          let count = 59;
+          this.setState({count});
+          this.interval = setInterval(() => {
+            count -= 1;
+            this.setState({count});
+            if (count === 0) {
+              clearInterval(this.interval);
+            }
+          }, 1000);
+        })
+
       }
-    }, 1000);
+
+    });
+
   };
 
   getPasswordStatus = () => {
@@ -75,14 +89,16 @@ class Register extends React.PureComponent {
     e.preventDefault();
     const {form, dispatch} = this.props;
     form.validateFields({force: true}, (err, values) => {
+      console.log('values', values);
       if (!err) {
         const {prefix} = this.state;
         dispatch({
-          type: 'register/submit',
+          type: 'register/register',
           payload: {
             ...values,
-            prefix,
           },
+        }).then(value => {
+          router.push('/login');
         });
       }
     });
@@ -165,18 +181,18 @@ class Register extends React.PureComponent {
         <h3>注册</h3>
         <Form onSubmit={this.handleSubmit}>
           <FormItem>
-            {getFieldDecorator('mail', {
+            {getFieldDecorator('mobile', {
               rules: [
                 {
                   required: true,
-                  message: '请输入邮箱地址！',
+                  message: '请输入手机号码！',
                 },
                 {
-                  type: 'email',
-                  message: '邮箱地址格式错误！',
+                  pattern: /^1\d{10}$/,
+                  message: '手机号格式错误！',
                 },
               ],
-            })(<Input placeholder="邮箱"/>)}
+            })(<Input placeholder="手机号码"/>)}
           </FormItem>
           <FormItem help={help}>
             <Popover
@@ -216,26 +232,9 @@ class Register extends React.PureComponent {
             })(<Input type="password" placeholder="确认密码"/>)}
           </FormItem>
           <FormItem>
-            <InputGroup compact>
-
-              {getFieldDecorator('mobile', {
-                rules: [
-                  {
-                    required: true,
-                    message: '请输入手机号！',
-                  },
-                  {
-                    pattern: /^1\d{10}$/,
-                    message: '手机号格式错误！',
-                  },
-                ],
-              })(<Input placeholder="11位手机号"/>)}
-            </InputGroup>
-          </FormItem>
-          <FormItem>
             <Row gutter={8}>
               <Col span={16}>
-                {getFieldDecorator('captcha', {
+                {getFieldDecorator('sms', {
                   rules: [
                     {
                       required: true,
