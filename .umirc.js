@@ -11,7 +11,7 @@ export default {
     }
   },
   theme: {
-    "primary-color": "#f9b016",
+    "primary-color": "#30344d",
     // '@icon-url': '"/iconfont/iconfont"'
   },
   plugins:[

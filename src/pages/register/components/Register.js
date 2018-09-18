@@ -223,7 +223,7 @@ class Register extends React.PureComponent {
               rules: [
                 {
                   required: true,
-                  message: '请确认密码！',
+                  message: '请输入确认密码！',
                 },
                 {
                   validator: this.checkConfirm,
@@ -254,6 +254,15 @@ class Register extends React.PureComponent {
                 </Button>
               </Col>
             </Row>
+          </FormItem>
+          <FormItem>
+            {getFieldDecorator('invitedId', {
+              rules: [
+                {
+                  required: false,
+                },
+              ],
+            })(<Input placeholder="邀请码(选填)"/>)}
           </FormItem>
           <FormItem>
             <Button

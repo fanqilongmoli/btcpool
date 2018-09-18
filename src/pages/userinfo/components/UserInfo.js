@@ -6,7 +6,7 @@ class UserInfo extends React.PureComponent {
   render() {
     return (
       <div style={{marginTop: 20}}>
-        <Card bordered={false} style={{background: '#001529', color: '#ffffff'}}>
+        <Card bordered={false} style={{background: '#262835', color: '#ffffff'}}>
           <Row>
             <Col span={6}>加入日期</Col>
             <Col span={6}> 2018-09-02</Col>

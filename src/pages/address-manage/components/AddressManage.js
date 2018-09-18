@@ -29,7 +29,7 @@ class AddressManage extends React.PureComponent {
   render() {
     const {getFieldDecorator} = this.props.form;
     return (
-      <Card bordered={false} style={{background: '#001529', color: '#ffffff', marginTop: 20}}>
+      <Card bordered={false} style={{background: '#262835', color: '#ffffff', marginTop: 20}}>
 
         <Form onSubmit={this.handleSubmit}>
           <FormItem

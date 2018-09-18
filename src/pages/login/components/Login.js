@@ -26,7 +26,9 @@ const Login = ({
         return
       }
       loginValue = values;
-      recaptchaInstance.execute();
+      dispatch({type: 'login/login', payload: loginValue}).then(value => {router.push('/dashboard')})
+
+      // recaptchaInstance.execute();
 
     })
   };
@@ -38,7 +40,7 @@ const Login = ({
 
   const verifyCallback = (response) => {
     console.log(response);
-    dispatch({type: 'login/login', payload: loginValue}).then(value => {router.push('/dashboard')})
+    // dispatch({type: 'login/login', payload: loginValue}).then(value => {router.push('/dashboard')})
   };
 
   const expiredCallback = () => {

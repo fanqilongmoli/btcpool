@@ -40,11 +40,11 @@ const App = ({dispatch,children, location, app}) => {
 
   return (
     <Layout>
-      <Header style={{position: 'fixed', zIndex: 1, width: '100%'}}>
+      <Header style={{position: 'fixed', zIndex: 1, width: '100%',background:'#262835'}}>
         <Headers/>
       </Header>
-      <Layout style={{background: '#000', marginTop: 64}}>
-        <Sider width={200} style={{background: '#000'}}>
+      <Layout style={{background: '#131720', marginTop: 64}}>
+        <Sider width={200} >
           <Menus {...menusProps}/>
         </Sider>
         <Content style={{padding: '24px', minHeight: 280}}>

@@ -1,5 +1,7 @@
 import React from 'react'
 import {Form, Input, Button, Card} from 'antd'
+import {connect} from 'dva'
+import router from "umi/router";
 
 const FormItem = Form.Item;
 const formItemLayout = {
@@ -26,12 +28,25 @@ const tailFormItemLayout = {
 };
 
 class UpdatePassword extends React.PureComponent {
-
+  handleSubmit=()=>{
+    const {form, dispatch} = this.props;
+    form.validateFields({force: true}, (err, values) => {
+      console.log('values', values);
+      if (!err) {
+        dispatch({
+          type: 'updatePassword/updatePassword',
+          payload: {
+            ...values,
+          },
+        });
+      }
+    });
+  };
 
   render() {
     const {getFieldDecorator} = this.props.form;
     return (
-      <Card bordered={false} style={{background: '#001529', color: '#ffffff',marginTop: 20}}>
+      <Card bordered={false} style={{background: '#262835', color: '#ffffff',marginTop: 20}}>
 
         <Form onSubmit={this.handleSubmit}>
           <FormItem
@@ -40,14 +55,12 @@ class UpdatePassword extends React.PureComponent {
             当前密码
           </span>}
           >
-            {getFieldDecorator('email', {
+            {getFieldDecorator('password', {
               rules: [{
-                type: 'email', message: 'The input is not valid E-mail!',
-              }, {
-                required: true, message: 'Please input your E-mail!',
+                required: true, message: '请输入当前密码!',
               }],
             })(
-              <Input/>
+              <Input type="password"/>
             )}
           </FormItem>
           <FormItem
@@ -56,9 +69,9 @@ class UpdatePassword extends React.PureComponent {
             新密码
           </span>}
           >
-            {getFieldDecorator('password', {
+            {getFieldDecorator('newPassword', {
               rules: [{
-                required: true, message: 'Please input your password!',
+                required: true, message: '请输入新密码!',
               }],
             })(
               <Input type="password"/>
@@ -72,7 +85,7 @@ class UpdatePassword extends React.PureComponent {
           >
             {getFieldDecorator('confirm', {
               rules: [{
-                required: true, message: 'Please confirm your password!',
+                required: true, message: '请输入确认密码',
               }],
             })(
               <Input type="password"/>
@@ -89,4 +102,4 @@ class UpdatePassword extends React.PureComponent {
   }
 }
 
-export default Form.create()(UpdatePassword);
+export default connect(({updatePassword,loading})=>({updatePassword,loading}))(Form.create()(UpdatePassword));

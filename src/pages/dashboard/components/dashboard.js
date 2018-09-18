@@ -11,7 +11,7 @@ const Dashboard = () => {
     <div style={{paddingTop: 20}}>
       <Row gutter={20}>
         <Col span={13}>
-          <div style={{background: '#001529',}}>
+          <div style={{background: '#262835',}}>
             <div style={{paddingTop: 10, paddingLeft: 10}}>我的算力 (BTC)</div>
             <div style={{padding: 10}}>0 H/s (现在), 0 H/s (24小时平均)</div>
           </div>
@@ -30,7 +30,7 @@ const Dashboard = () => {
         {/*</Col>*/}
       </Row>
       <div>
-        <div style={{background: '#001529', marginTop: 20, width: 900, float: 'left'}}>
+        <div style={{background: '#262835', marginTop: 20, width: 900, float: 'left'}}>
           <Groupedcolumn/>
         </div>
 

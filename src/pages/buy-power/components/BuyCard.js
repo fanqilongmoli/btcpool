@@ -19,14 +19,14 @@ export default class BuyCard extends React.PureComponent {
       </div>
     );
     return (
-      <div style={{width: 400, background: '#001529', marginTop: 20}}>
+      <div style={{width: 400, background: '#262835', marginTop: 20}}>
 
-        <div style={{paddingTop: 20, background: '#f9b016', textAlign: 'center', fontSize: 25, color: '#ffffff'}}>5 Year
+        <div style={{paddingTop: 20, background: '#30344d', textAlign: 'center', fontSize: 25, color: '#ffffff'}}>5 Year
           Plan
         </div>
         <div style={{
           paddingBottom: 20,
-          background: '#f9b016',
+          background: '#30344d',
           textAlign: 'center',
           fontSize: 25,
           color: '#ffffff',

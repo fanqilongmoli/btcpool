@@ -12,7 +12,7 @@ const Menus = ({onMenuClick,selectedKeys}) => {
         mode="inline"
         theme={'dark'}
         defaultSelectedKeys={[selectedKeys]}
-        style={{height: '100%'}}>
+        style={{height: '100%',background:'#262835'}}>
         <div style={{height: 78, padding: 20,}}>
           <Avatar style={{float: 'left'}}>User</Avatar>
           <div style={{float: 'left'}}>
