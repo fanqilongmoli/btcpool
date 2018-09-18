@@ -4,6 +4,13 @@ import {connect} from 'dva'
 import {Button, Form, Input} from 'antd'
 import styles from './Login.less'
 import router from 'umi/router'
+import Recaptcha from 'react-recaptcha'
+
+// site key
+const sitekey = '6LeuDjsUAAAAAJ2TUI5RAbwdhRo9GeZlSidXLmTu';
+let recaptchaInstance;
+let loginValue;
+
 
 const Login = ({
                  loading,
@@ -18,8 +25,24 @@ const Login = ({
       if (error) {
         return
       }
-      dispatch({type: 'login/login', payload: values}).then(value => {router.push('/dashboard')})
+      loginValue = values;
+      recaptchaInstance.execute();
+
     })
+  };
+
+  // specifying your onload callback function
+  const callback = () => {
+    console.log('Done!!!!');
+  };
+
+  const verifyCallback = (response) => {
+    console.log(response);
+    dispatch({type: 'login/login', payload: loginValue}).then(value => {router.push('/dashboard')})
+  };
+
+  const expiredCallback = () => {
+    recaptchaInstance.reset();
   };
 
   const registerClick = ()=>{
@@ -66,6 +89,20 @@ const Login = ({
           <span className={styles.register} onClick={registerClick}>注册新账号</span>
         </div>
       </Form>
+
+      <Recaptcha
+        ref={e => recaptchaInstance = e}
+        sitekey={sitekey}
+        size="invisible"
+        render="onload"
+        verifyCallback={verifyCallback}
+        onloadCallback={callback}
+        expiredCallback={expiredCallback}
+        theme={'dark'}
+        tabindex={'0'}
+
+        hl={''}
+      />
     </div>
   )
 };
