@@ -1,5 +1,6 @@
 import React from 'react'
 import {Card, Input, Button, Form} from 'antd'
+import {connect} from 'dva'
 
 const FormItem = Form.Item;
 const formItemLayout = {
@@ -25,50 +26,83 @@ const tailFormItemLayout = {
   },
 };
 
-class AddressManage extends React.PureComponent {
-  render() {
-    const {getFieldDecorator} = this.props.form;
-    return (
-      <Card bordered={false} style={{background: '#262835', color: '#ffffff', marginTop: 20}}>
+let addressForm;
+const AddressManage = ({dispatch, address}) => {
+  const handleSubmit = () => {
 
-        <Form onSubmit={this.handleSubmit}>
-          <FormItem
-            {...formItemLayout}
-            label={<span style={{color: '#ffffff'}}>
+    addressForm.validateFieldsAndScroll(['address'], (errors, values) => {
+      console.log('values', values);
+      if (!errors) {
+        dispatch({
+          type: 'address/address',
+          payload: values
+        })
+      }
+    });
+  };
+
+  const AddressForm = Form.create({
+
+    onFieldsChange(props, changedFields) {
+      props.onChange(changedFields);
+    },
+
+    mapPropsToFields(props) {
+      return {
+        address: Form.createFormField({
+          ...props.address,
+          value: props.address || ''
+        }),
+      }
+    }
+
+  })((props) => {
+
+    const {getFieldDecorator} = props.form;
+    addressForm = props.form;
+    return (
+      <Form>
+        <FormItem
+          {...formItemLayout}
+          label={<span style={{color: '#ffffff'}}>
             BTC Address
           </span>}
-          >
-            {getFieldDecorator('address', {
-              rules: [{
-                required: true, message: 'Please input your password!',
-              }],
-            })(
-              <Input/>
-            )}
-          </FormItem>
-          <FormItem
-            {...formItemLayout}
-            label={<span style={{color: '#ffffff'}}>
-              密码
-          </span>}
-          >
-            {getFieldDecorator('password', {
-              rules: [{
-                required: true, message: 'Please confirm your password!',
-              }],
-            })(
-              <Input type="password"/>
-            )}
-          </FormItem>
+        >
+          {getFieldDecorator('address', {
+            rules: [{
+              required: true, message: '请输入BTC地址!',
+            },{
+              max: 64, min: 20, message: '地址最长64位最少20位!',
+            }
+            ],
+          })(
+            <Input/>
+          )}
+        </FormItem>
 
-          <FormItem {...tailFormItemLayout}>
-            <Button type="primary" style={{marginRight: 20}}>更换地址</Button>
-            <Button type="primary" htmlType="submit">锁定地址</Button>
-          </FormItem>
-        </Form>
-      </Card>
+        <FormItem {...tailFormItemLayout}>
+          <Button type="primary" onClick={handleSubmit}>保存地址</Button>
+        </FormItem>
+      </Form>
     )
-  }
-}
 
-export default Form.create()(AddressManage);
+  });
+  const handleFormChange = (changedFields) => {
+
+  };
+
+  const addressFormProps = {
+    address: address.data.address,
+    onChange: handleFormChange
+  };
+
+
+  return (
+    <Card bordered={false} style={{background: '#262835', color: '#ffffff', marginTop: 20}}>
+      <AddressForm {...addressFormProps}/>
+    </Card>
+  )
+};
+
+
+export default connect(({address}) => ({address}))(AddressManage);
