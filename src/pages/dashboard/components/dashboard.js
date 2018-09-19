@@ -19,7 +19,7 @@ const Dashboard = ({dispatch, dashboard}) => {
   const onOk = (value) => {
     dispatch({
       type: 'dashboard/getChart',
-      payload:{
+      payload: {
         start: new Date(value[0]._d).getTime(),
         end: new Date(value[1]._d).getTime(),
       }
@@ -28,14 +28,12 @@ const Dashboard = ({dispatch, dashboard}) => {
 
   return (
     <div style={{paddingTop: 20}}>
-      <Row gutter={20}>
-        <Col span={13}>
-          <div style={{background: '#262835',}}>
-            <div style={{paddingTop: 10, paddingLeft: 10}}>我的算力 (BTC)</div>
-            <div style={{padding: 10}}>{userState.hash} H/s (现在)</div>
-          </div>
-        </Col>
-      </Row>
+
+      <div style={{background: '#262835', width: 900}}>
+        <div style={{paddingTop: 20, paddingLeft: 20}}>我的算力 (BTC)</div>
+        <div style={{padding: 20}}>{userState.hash} H/s (现在)</div>
+      </div>
+
       <div style={{marginTop: 10}}>
         <RangePicker
           showTime={{format: 'HH:mm'}}
@@ -46,7 +44,7 @@ const Dashboard = ({dispatch, dashboard}) => {
         />
       </div>
 
-      <div style={{background: '#262835', marginTop: 10, width: 900, float: 'left'}}>
+      <div style={{background: '#262835', marginTop: 10, width: 900}}>
         <Groupedcolumn {...chart}/>
       </div>
 

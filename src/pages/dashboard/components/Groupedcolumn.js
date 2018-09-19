@@ -15,42 +15,52 @@ import {
   Util
 } from "bizcharts";
 import DataSet from "@antv/data-set";
+import moment from 'moment'
+
 
 class Groupedcolumn extends React.Component {
   render() {
-
+    const data = this.props.data;
+    // data.map(item=>{
+    //   item.day = moment(item.day).format('MM-DD');
+    //   return item
+    // });
     return (
-      <div>
-        <Chart height={400} data={this.props.data} forceFit>
-          <Axis name="day"/>
-          <Axis name="value" label={{
-            offset: 12,
-            formatter(text, item, index) {
-              return text + "btc";
-            },
+
+      <Chart height={400} data={data} forceFit={true}>
+        <Coord scale={[0.9, 1]}/>
+        <Axis name="day" label={{
+          offset: 30,
+          autoRotate:true
+        }}/>
+        <Axis name="value" label={{
+          offset: 30,
+          formatter(text, item, index) {
+            return text + "btc";
+          },
+        }}/>
+        <Tooltip
+          crosshairs={{
+            type: 'cross',
+            style: {
+              lineWidth: 2,
+              stroke: "#30344d",
+            }
           }}/>
-          <Tooltip
-            crosshairs={{
-              type: 'cross',
-              style: {
-                lineWidth: 2,
-                stroke: "#30344d",
-              }
-            }}/>
-          <Geom
-            type="interval"
-            position="day*value" //x * y
-            tooltip={['day*value', (day, value) => {
-              return {
-                //自定义 tooltip 上显示的 title 显示内容等。
-                name: '收入',
-                title: '时间:' + day,
-                value: value + 'btc'
-              };
-            }]}
-          />
-        </Chart>
-      </div>
+        <Geom
+          type="interval"
+          position="day*value" //x * y
+          tooltip={['day*value', (day, value) => {
+            return {
+              //自定义 tooltip 上显示的 title 显示内容等。
+              name: '收入',
+              title: '时间:' + day,
+              value: value + 'btc'
+            };
+          }]}
+        />
+      </Chart>
+
     );
   }
 }
