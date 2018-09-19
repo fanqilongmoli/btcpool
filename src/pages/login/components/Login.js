@@ -73,12 +73,8 @@ const Login = ({
         </Form.Item>
         <Form.Item>
           {getFieldDecorator('password', {
-            rules: [
-              {
-                required: true,
-                message: '请输入密码'
-              },
-            ],
+
+
           })(<Input type="password" onPressEnter={handleEnter} placeholder="密码" autoComplete="off"
                     disableautocomplete="true"/>)}
         </Form.Item>

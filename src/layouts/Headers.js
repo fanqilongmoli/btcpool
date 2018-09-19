@@ -1,5 +1,5 @@
 import React from 'react'
-import {Button, Icon} from 'antd';
+import {Button, Avatar, Row, Col} from 'antd';
 import router from 'umi/router';
 import styles from './Header.less'
 import config from "../utils/config";
@@ -13,17 +13,32 @@ const Headers = ({location}) => {
     lineHeight: '64px',
     cursor: 'pointer'
   };
-  const logout=()=>{
+  const logout = () => {
     window.localStorage.removeItem(`${config.prefix}username`);
     window.localStorage.removeItem(`${config.prefix}token`);
     router.push('/login')
   };
-
+  const username = window.localStorage.getItem(`${config.prefix}username`);
   return (
-    <div >
-      <span style={logoStyle}>Bitcoin.com矿池</span>
-      <Button style={{float: 'right', marginTop: 16}} type='primary' icon={'logout'} onClick={logout}>注销</Button>
+    <div>
+      <Row>
+        <Col span={6}>
+          <span style={logoStyle}>Bitcoin.com矿池</span>
+        </Col>
+        <Col span={17}>
+          <div style={{float:'right',marginRight:20}}>
+            <Avatar>User</Avatar>
+            <span style={{marginTop: 10, marginLeft: 5}}>{username}</span>
+          </div>
+        </Col>
+        <Col span={1}>
+          <Button type='primary' icon={'logout'} onClick={logout}>注销</Button>
+        </Col>
+
+      </Row>
+
     </div>
+
   );
 };
 

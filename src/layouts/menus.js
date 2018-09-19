@@ -13,13 +13,7 @@ const Menus = ({onMenuClick,selectedKeys}) => {
         theme={'dark'}
         defaultSelectedKeys={[selectedKeys]}
         style={{height: '100%',background:'#262835'}}>
-        <div style={{height: 78, padding: 20,}}>
-          <Avatar style={{float: 'left'}}>User</Avatar>
-          <div style={{float: 'left'}}>
-            <div style={{marginTop: 10, marginLeft: 5}}>fanqilong</div>
-            <div style={{marginTop: 16, marginLeft: 5}}>0.000 000 00 btc</div>
-          </div>
-        </div>
+
         <Menu.Item key={'1'} onClick={() => {onMenuClick('1')}}>
           <Link to='/dashboard'>
             <Icon type="desktop"/>
