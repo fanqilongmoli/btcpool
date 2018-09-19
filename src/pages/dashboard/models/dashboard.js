@@ -4,7 +4,7 @@ import config from "../../../utils/config";
 
 export default {
 
-  namespace: 'goods',
+  namespace: 'dashboard',
 
   state: {
     userState: {},

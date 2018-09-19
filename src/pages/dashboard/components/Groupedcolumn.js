@@ -20,59 +20,145 @@ class Groupedcolumn extends React.Component {
   render() {
     const data = [
       {
-        name: "London",
-        "Jan.": 18.9,
-        "Feb.": 28.8,
-        "Mar.": 39.3,
-        "Apr.": 81.4,
-        May: 47,
-        "Jun.": 20.3,
-        "Jul.": 24,
-        "Aug.": 35.6
+        day: "8-11",
+        value: 1
       },
       {
-        name: "Berlin",
-        "Jan.": 12.4,
-        "Feb.": 23.2,
-        "Mar.": 34.5,
-        "Apr.": 99.7,
-        May: 52.6,
-        "Jun.": 35.5,
-        "Jul.": 37.4,
-        "Aug.": 42.4
+        day: "8-12",
+        value: 21
+      },
+      {
+        day: "8-13",
+        value: 21
+      }, {
+        day: "8-14",
+        value: 21
+      }, {
+        day: "8-15",
+        value: 31
+      }, {
+        day: "8-16",
+        value: 21
+      }, {
+        day: "8-17",
+        value: 21
+      }, {
+        day: "8-18",
+        value: 21
+      },
+      {
+        day: "8-19",
+        value: 1.11
+      },{
+        day: "8-21",
+        value: 1
+      },
+      {
+        day: "8-22",
+        value: 21
+      },
+      {
+        day: "8-23",
+        value: 21
+      }, {
+        day: "8-24",
+        value: 21
+      }, {
+        day: "8-25",
+        value: 31
+      }, {
+        day: "8-26",
+        value: 21
+      }, {
+        day: "8-27",
+        value: 21
+      }, {
+        day: "8-28",
+        value: 21
+      },
+      {
+        day: "8-29",
+        value: 1.11
+      },
+      {
+        day: "8-33",
+        value: 21
+      }, {
+        day: "8-34",
+        value: 21
+      }, {
+        day: "8-35",
+        value: 31
+      }, {
+        day: "8-36",
+        value: 21
+      }, {
+        day: "8-37",
+        value: 21
+      }, {
+        day: "8-38",
+        value: 21
+      },
+      {
+        day: "8-39",
+        value: 1.11
+      },
+      {
+        day: "8-43",
+        value: 21
+      }, {
+        day: "8-44",
+        value: 21
+      }, {
+        day: "8-45",
+        value: 31
+      }, {
+        day: "8-46",
+        value: 21
+      }, {
+        day: "8-47",
+        value: 21
+      }, {
+        day: "8-48",
+        value: 21
+      },
+      {
+        day: "8-49",
+        value: 1.11
       }
+
     ];
-    const ds = new DataSet();
-    const dv = ds.createView().source(data);
-    dv.transform({
-      type: "fold",
-      fields: ["Jan.", "Feb.", "Mar.", "Apr.", "May", "Jun.", "Jul.", "Aug."],
-      // 展开字段集
-      key: "月份",
-      // key字段
-      value: "月均降雨量" // value字段
-    });
+
+
     return (
       <div>
-        <Chart height={400} data={dv} forceFit>
-          <Axis name="月份" />
-          <Axis name="月均降雨量" />
-          <Legend />
+        <Chart height={400} data={data} forceFit>
+          <Axis name="day"/>
+          <Axis name="value" label={{
+            offset: 12,
+            formatter(text, item, index) {
+              return text + "btc";
+            },
+          }}/>
           <Tooltip
             crosshairs={{
-              type: "y"
-            }}
-          />
+              type: 'cross',
+              style: {
+                lineWidth: 2,
+                stroke: "#30344d",
+              }
+            }}/>
           <Geom
             type="interval"
-            position="月份*月均降雨量"
-            color={"name"}
-            adjust={[
-              {
-                type: "dodge",
-                marginRatio: 1 / 32
-              }
-            ]}
+            position="day*value" //x * y
+            tooltip={['day*value', (day, value) => {
+              return {
+                //自定义 tooltip 上显示的 title 显示内容等。
+                name: '收入',
+                title: '时间:' + day,
+                value: value + 'btc'
+              };
+            }]}
           />
         </Chart>
       </div>
