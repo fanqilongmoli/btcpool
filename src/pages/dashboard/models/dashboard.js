@@ -8,7 +8,7 @@ export default {
 
   state: {
     userState: {},
-    chart:{},
+    chart: {},
   },
 
   reducers: {
@@ -22,6 +22,7 @@ export default {
   effects: {
     * getState({payload}, {call, put}) {
       const response = yield call(service.getState);
+      console.log(response);
       yield put({
         type: 'updateState',
         payload: {
@@ -31,8 +32,8 @@ export default {
 
     },
     * getChart({payload}, {call, put}) {
-      const {start,end} = payload;
-      const response = yield call(service.getChart,start,end);
+      const {start, end} = payload;
+      const response = yield call(service.getChart, start, end);
       yield put({
         type: 'updateState',
         payload: {
@@ -50,9 +51,10 @@ export default {
           dispatch({
             type: 'getState'
           });
+          const currentTime = new Date().getTime();
           dispatch({
             type: 'getChart',
-            payload:{start:'2018-09-19',end:'2018-09-19'}
+            payload: {start: currentTime - 1000 * 60 * 60 * 24 * 30, end: currentTime}
           });
         }
       });

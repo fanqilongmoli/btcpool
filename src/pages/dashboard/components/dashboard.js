@@ -10,14 +10,19 @@ const {RangePicker} = DatePicker;
 
 const Dashboard = ({dispatch, dashboard}) => {
 
+  const {userState, chart} = dashboard;
+
   const onChange = (value, dateString) => {
     console.log('Selected Time: ', value);
     console.log('Formatted Selected Time: ', dateString);
   };
   const onOk = (value) => {
-    console.log('onOk: ', value);
     dispatch({
-      type: 'dashboard/getChart'
+      type: 'dashboard/getChart',
+      payload:{
+        start: new Date(value[0]._d).getTime(),
+        end: new Date(value[1]._d).getTime(),
+      }
     })
   };
 
@@ -27,7 +32,7 @@ const Dashboard = ({dispatch, dashboard}) => {
         <Col span={13}>
           <div style={{background: '#262835',}}>
             <div style={{paddingTop: 10, paddingLeft: 10}}>我的算力 (BTC)</div>
-            <div style={{padding: 10}}>0 H/s (现在), 0 H/s (24小时平均)</div>
+            <div style={{padding: 10}}>{userState.hash} H/s (现在)</div>
           </div>
         </Col>
       </Row>
@@ -42,7 +47,7 @@ const Dashboard = ({dispatch, dashboard}) => {
       </div>
 
       <div style={{background: '#262835', marginTop: 10, width: 900, float: 'left'}}>
-        <Groupedcolumn/>
+        <Groupedcolumn {...chart}/>
       </div>
 
     </div>
