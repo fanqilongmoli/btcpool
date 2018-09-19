@@ -57,7 +57,7 @@ const WithdrawForm = Form.create({
             required: true, message: '请输入BTC数量!',
           }],
         })(
-          <InputNumber/>
+          <InputNumber style={{width:'100%'}}/>
         )}
       </FormItem>
       <FormItem
