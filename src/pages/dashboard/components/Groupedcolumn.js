@@ -20,7 +20,8 @@ import moment from 'moment'
 
 class Groupedcolumn extends React.Component {
   render() {
-    const data = this.props.data;
+    const data = this.props.data?this.props.data:[];
+
     data.map(item=>{
       item.day = moment(item.day).format('MM-DD');
       return item

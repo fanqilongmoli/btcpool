@@ -8,7 +8,8 @@ export default {
 
   state: {
     account: {},
-    hash: 0
+    hash: 0,
+    address:'',
   },
 
   reducers: {
@@ -24,7 +25,7 @@ export default {
       const response = yield call(addressManageService.getState);
       yield put({
         type: 'updateState',
-        payload: {account: response.account, hash: response.hash}
+        payload: {account: response.account, hash: response.hash,address:response.address}
       })
 
     },

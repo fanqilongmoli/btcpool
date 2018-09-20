@@ -28,7 +28,7 @@ class UserInfo extends React.PureComponent {
           <Divider dashed={true}/>
           <Row>
             <Col span={6}>现在提现地址 (BTC)</Col>
-            <Col span={6}> </Col>
+            <Col span={6}> {userinfo.address}</Col>
           </Row>
           <Divider dashed={true}/>
         </Card>
