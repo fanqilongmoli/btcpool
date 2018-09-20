@@ -1,5 +1,5 @@
 import React from 'react';
-import {Modal, Form, Input} from 'antd';
+import {Modal, Form, Input, InputNumber} from 'antd';
 
 const FormItem = Form.Item;
 
@@ -8,6 +8,10 @@ class BuyPowerModal extends React.PureComponent {
     super(props);
     this.state = {
       visible: false,
+      //每日收益
+      earning: 0,
+      //费用
+      fee: 0
     };
   }
 
@@ -23,17 +27,28 @@ class BuyPowerModal extends React.PureComponent {
   hideModelHandler = () => {
     this.setState({
       visible: false,
+      earning: 0,
+      fee: 0,
     });
   };
 
   okHandler = () => {
-    const {onOk} = this.props;
+    const {onOk, record} = this.props;
     this.props.form.validateFields((err, values) => {
       if (!err) {
+        values.hashRateId = record.id;
+        values.pay = record.price * values.hash;
         onOk(values);
         this.hideModelHandler();
       }
     });
+  };
+  onChange = value => {
+    console.log(value);
+    this.setState({
+      earning: this.props.parameters.earning * value,
+      fee: this.props.parameters.fee * value,
+    })
   };
 
   render() {
@@ -61,36 +76,23 @@ class BuyPowerModal extends React.PureComponent {
           <Form horizontal onSubmit={this.okHandler}>
             <FormItem
               {...formItemLayout}
-              label="用户名"
+              label="购买算力"
             >
               {
-                getFieldDecorator('username', {
-                  initialValue: username,
+                getFieldDecorator('hash', {
                   rules: [
                     {
                       required: true,
-                      message: '请输入用户名'
+                      message: '请输入购买算力'
                     },
                   ],
-                })(<Input/>)
+                })(<InputNumber precision={0}
+                                style={{width: '100%'}} onChange={this.onChange}/>)
               }
             </FormItem>
-            <FormItem
-              {...formItemLayout}
-              label="密码"
-            >
-              {
-                getFieldDecorator('password', {
-                  rules: [
-                    {
-                      required: true,
-                      message: '请输入密码'
-                    },
-                  ],
-                })(<Input type='password'/>)
-              }
-            </FormItem>
-
+            <div>
+              {/*收益:{this.state.earning}btc;费用:{this.state.fee}btc*/}
+            </div>
           </Form>
         </Modal>
       </span>

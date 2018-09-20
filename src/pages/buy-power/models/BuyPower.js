@@ -1,6 +1,7 @@
 import * as service from '../services/BuyPower';
 import {message} from 'antd'
 import config from "../../../utils/config";
+import QrCodeModal from "../components/QrCodeModal";
 
 export default {
 
@@ -9,6 +10,9 @@ export default {
   state: {
     tableData: [],
     parameters: {},
+    QrCode: false,
+    address:'',
+    pay:0,
   },
 
   reducers: {
@@ -22,14 +26,23 @@ export default {
   effects: {
     * getHashrates({payload}, {call, put}) {
       const response = yield call(service.getHashrates);
-      console.log(response);
+
       yield put({
         type: 'updateState',
         payload: {
           tableData: response.data.content,
-          parameters:response.params
+          parameters: response.params
         }
       })
+    },
+    * orders({payload}, {call, put}) {
+      const {pay} = payload;
+      const response = yield call(service.orders, payload);
+      yield put({
+        type: 'updateState',
+        payload: {QrCode: true,address:response.address,pay:pay}
+      });
+
     },
   },
   subscriptions: {
@@ -39,9 +52,6 @@ export default {
         if (pathname === '/buy-power') {
           dispatch({
             type: 'getHashrates'
-          });
-          dispatch({
-            type: 'parameters'
           });
         }
       });

@@ -21,10 +21,10 @@ import moment from 'moment'
 class Groupedcolumn extends React.Component {
   render() {
     const data = this.props.data;
-    // data.map(item=>{
-    //   item.day = moment(item.day).format('MM-DD');
-    //   return item
-    // });
+    data.map(item=>{
+      item.day = moment(item.day).format('MM-DD');
+      return item
+    });
     return (
 
       <Chart height={400} data={data} forceFit={true}>

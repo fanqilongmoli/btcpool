@@ -14,13 +14,16 @@ export function getHashrates() {
   })
 }
 
+
 /**
- * 获取参数列表
+ * 下订单
  * @returns {*}
  */
-export function parameters() {
+export function orders(data) {
   return request({
-    url: `${apiPrefix}/api/parameters`,
-    method: 'get'
+    url: `${apiPrefix}/api/hash-orders`,
+    method: 'post',
+    data
   })
 }
+
