@@ -3,6 +3,7 @@ import {Row, Col, Table} from 'antd'
 import {connect} from 'dva'
 import moment from 'moment'
 import styles from './BuyPower.less'
+import BuyPowerModal from "./BuyPowerModal";
 
 const BuyPower = ({buyPower, loading}) => {
   const columns = [{
@@ -25,40 +26,23 @@ const BuyPower = ({buyPower, loading}) => {
       key: 'period',
     },
     {
-      title: '单笔最大交易量',
-      dataIndex: 'max',
-      key: 'max',
+      title: '余额',
+      dataIndex: 'balance',
+      key: 'balance',
     },
     {
-      title: '单笔最小交易量',
+      title: '最小交易规格',
       dataIndex: 'min',
       key: 'min',
     },
-    {
-      title: '开始时间',
-      dataIndex: 'startTime',
-      key: 'startTime',
-      render: (text, record) => {
-        return moment(record.startTime).format('YYYY-MM-DD');
-      },
-    },
-    {
-      title: '结束时间',
-      dataIndex: 'endTime',
-      key: 'endTime',
-      render: (text, record) => {
-        return moment(record.endTime).format('YYYY-MM-DD');
-      },
-    },
-
     {
       title: '操作',
       key: 'action',
       render: (text, record) => (
         <span>
-          <a style={{color:'#ffffff'}} href="javascript:;" onClick={() => {
-          }}>购买</a>
-
+          <BuyPowerModal title={'购买算力产品'}>
+            <a style={{color:'#ffffff'}} href="javascript:;">购买</a>
+          </BuyPowerModal>
         </span>
       ),
     }
@@ -67,9 +51,10 @@ const BuyPower = ({buyPower, loading}) => {
     <div className={styles.myTable}>
       <Table
         bordered={true}
-        dataSource={buyPower.hashrates.content}
+        dataSource={buyPower.tableData}
         loading={loading.models.buyPower}
         columns={columns}
+        pagination={false}
         rowKey={record => record.salt}/>
     </div>
   )

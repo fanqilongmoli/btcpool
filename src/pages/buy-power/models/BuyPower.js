@@ -7,7 +7,7 @@ export default {
   namespace: 'buyPower',
 
   state: {
-    hashrates: {},
+    tableData: [],
     parameters: {},
   },
 
@@ -26,17 +26,8 @@ export default {
       yield put({
         type: 'updateState',
         payload: {
-          hashrates: response
-        }
-      })
-    },
-    * parameters({payload}, {call, put}) {
-      const response = yield call(service.parameters);
-      console.log(response);
-      yield put({
-        type: 'updateState',
-        payload: {
-          parameters: response
+          tableData: response.data.content,
+          parameters:response.params
         }
       })
     },
