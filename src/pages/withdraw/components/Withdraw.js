@@ -89,7 +89,7 @@ class Withdraw extends React.PureComponent {
     const {dispatch,withdraw} = this.props;
 
     const WithdrawFormProps = {
-      address: withdraw.data.address,
+      address: withdraw.data?withdraw.data.address:'',
       onOk(values) {
         dispatch({
           type: 'withdraw/withdraw',

@@ -71,7 +71,7 @@ const AddressManage = ({dispatch, address}) => {
           {getFieldDecorator('address', {
             rules: [{
               required: true, message: '请输入BTC地址!',
-            },{
+            }, {
               max: 64, min: 20, message: '地址最长64位最少20位!',
             }
             ],
@@ -92,7 +92,7 @@ const AddressManage = ({dispatch, address}) => {
   };
 
   const addressFormProps = {
-    address: address.data.address,
+    address: address.data ? address.data.address : '',
     onChange: handleFormChange
   };
 

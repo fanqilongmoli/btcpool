@@ -26,9 +26,9 @@ const Login = ({
         return
       }
       loginValue = values;
-      dispatch({type: 'login/login', payload: loginValue}).then(value => {router.push('/dashboard')})
+      // dispatch({type: 'login/login', payload: loginValue}).then(value => {router.push('/dashboard')})
 
-      // recaptchaInstance.execute();
+      recaptchaInstance.execute();
 
     })
   };
@@ -40,18 +40,23 @@ const Login = ({
 
   const verifyCallback = (response) => {
     console.log(response);
-    // dispatch({type: 'login/login', payload: loginValue}).then(value => {router.push('/dashboard')})
+    dispatch({type: 'login/login', payload: loginValue}).then(value => {
+      router.push('/dashboard')
+    }).catch(e => {
+      console.log('e', e);
+    });
+    recaptchaInstance.reset();
   };
 
   const expiredCallback = () => {
     recaptchaInstance.reset();
   };
 
-  const registerClick = ()=>{
+  const registerClick = () => {
     router.push('/register');
   };
 
-  const forgetClick =()=>{
+  const forgetClick = () => {
     router.push('/forget');
   };
 
@@ -72,11 +77,9 @@ const Login = ({
           })(<Input onPressEnter={handleEnter} placeholder="用户名" autoComplete="off" disableautocomplete="true"/>)}
         </Form.Item>
         <Form.Item>
-          {getFieldDecorator('password', {
-
-
-          })(<Input type="password" onPressEnter={handleEnter} placeholder="密码" autoComplete="off"
-                    disableautocomplete="true"/>)}
+          {getFieldDecorator('password', {})(<Input type="password" onPressEnter={handleEnter} placeholder="密码"
+                                                    autoComplete="off"
+                                                    disableautocomplete="true"/>)}
         </Form.Item>
 
         <Button type="primary" onClick={handleEnter} loading={loading.effects.login}>
