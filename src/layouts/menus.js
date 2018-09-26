@@ -51,6 +51,12 @@ const Menus = ({onMenuClick,selectedKeys}) => {
               <span>地址管理</span>
             </Link>
           </Menu.Item>
+          <Menu.Item key={'7'} onClick={() => {onMenuClick('7')}}>
+            <Link to='/common-problem'>
+              <Icon type="question"/>
+              <span>常见问题</span>
+            </Link>
+          </Menu.Item>
         </MenuItemGroup>
       </Menu>
   )

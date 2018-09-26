@@ -8,6 +8,7 @@ const breadcrumbNameMap = {
   '/userinfo': '个人信息',
   '/update-password': '修改密码',
   '/address-manage': '地址管理',
+  '/common-problem': '常见问题',
 };
 
 const Bread = ({location}) => {
