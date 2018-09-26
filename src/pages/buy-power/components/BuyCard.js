@@ -1,76 +1,42 @@
 import React from 'react'
 import {Card, Col, Row, Popover, Icon, Slider, Divider, Button} from 'antd'
+import BuyPowerModal from "./BuyPowerModal";
 
-export default class BuyCard extends React.PureComponent {
-  state = {
-    value: 0,
-  }
 
-  handleChange = (value) => {
-    this.setState({value});
-  };
+const BuyCard = ({data, parameters, onOk}) => {
+  console.log('data', data);
 
-  render() {
-    const hoverContent = (
-      <div>
-        <div>日常费用用于支付电费及维护费用。</div>
-        <div>日常费用从每日收益中扣除。</div>
-        <div>如果手续费连续60天超过收益，将结束合约。</div>
-      </div>
-    );
-    return (
-      <div style={{width: 400, background: '#262835', marginTop: 20}}>
+  return (
+    <Card
+      extra={
+        <BuyPowerModal title={'购买算力产品'} onOk={onOk} record={data} parameters={parameters}>
+          <a style={{color: '#000'}} href="javascript:;">购买</a>
+        </BuyPowerModal>
+      }>
+      <Row>
+        <Col span={12}>算力类型: <span style={{color: '#000', marginLeft: 20}}>BTC</span></Col>
+        <Col span={12}>预计日收益(BTC):<span style={{color: '#000', marginLeft: 20}}>{parameters.earning}</span></Col>
+      </Row>
+      <Divider/>
+      <Row>
+        <Col span={12}>算力大小:<span style={{color: '#000', marginLeft: 20}}>{data.min}T/份</span></Col>
+        <Col span={12}>电费:<span style={{color: '#000', marginLeft: 20}}>{
+          data.electricityFeeType === 1?(data.electricityFee)+'BTC':'包含电费'
+        }</span></Col>
+      </Row>
+      <Divider/>
+      <Row>
+        <Col span={12}>算力价格:<span style={{color: '#000', marginLeft: 20}}>{data.price}BTC</span></Col>
+        <Col span={12}>维修费:<span style={{color: '#000', marginLeft: 20}}>0</span></Col>
+      </Row>
+      <Divider/>
+      <Row>
+        <Col span={12}>期限:<span style={{color: '#000', marginLeft: 20}}>{data.period}年</span></Col>
+        <Col span={12}>上架时间:<span style={{color: '#000', marginLeft: 20}}>24小时后</span></Col>
+      </Row>
+    </Card>
+  )
 
-        <div style={{paddingTop: 20, background: '#30344d', textAlign: 'center', fontSize: 25, color: '#ffffff'}}>5 Year
-          Plan
-        </div>
-        <div style={{
-          paddingBottom: 20,
-          background: '#30344d',
-          textAlign: 'center',
-          fontSize: 25,
-          color: '#ffffff',
-          marginBottom: 20
-        }}>提供方
-          Bitcoin.com
-        </div>
-        <Row>
-          <Col span={12}>
-            <div style={{textAlign: 'center', fontSize: 30, color: '#ffffff'}}>$219</div>
-            <div style={{textAlign: 'center', fontSize: 20, color: '#ffffff'}}>最初成本</div>
-          </Col>
-          <Col span={12}>
-            <div style={{textAlign: 'center', fontSize: 30, color: '#ffffff'}}>$0.14</div>
-            <div style={{textAlign: 'center', fontSize: 20, color: '#ffffff'}}>日常费用
-              <Popover content={hoverContent} trigger="hover">
-                <Icon type="question"/>
-              </Popover>
-            </div>
-          </Col>
-        </Row>
-        <div style={{textAlign: 'center', fontSize: 20, color: '#ffffff', marginTop: 10}}>$219 per
-          TH/s
-        </div>
-        <div style={{paddingRight: 20, paddingLeft: 20}}>
-          <Slider max={2500} min={0} onChange={this.handleChange} value={this.state.value}/>
-        </div>
-        <div style={{textAlign: 'center', marginTop: 20, fontSize: 20}}>当前每日收益 <Popover content={hoverContent}
-                                                                                        trigger="hover">
-          <Icon type="question"/>
-        </Popover></div>
-        <div style={{textAlign: 'center', fontSize: 20}}>0.057645 BTC ($361.68) 每天</div>
-        <Divider dashed={true}/>
-        <div style={{fontSize: 16, padding: 20, textAlign: 'center'}}>100%保证正常运行的时间和稳定的算力</div>
-        <div style={{fontSize: 16, padding: 20, textAlign: 'center'}}>
-          <div>1 TH/s 最低购买量</div>
-          <div>4.376 PH/s 现有云挖矿合约</div>
-        </div>
-        <div style={{fontSize: 16, padding: 20, textAlign: 'center'}}>BTC 银行转账 接受</div>
-        <div style={{textAlign: 'center', padding: 20}}>
+};
 
-          <Button type='primary' icon={'buy'}>购买</Button>
-        </div>
-      </div>
-    )
-  }
-}
+export default BuyCard;

@@ -1,10 +1,11 @@
 import React from 'react';
-import {Row, Col, Table} from 'antd'
+import {Row, Col, Table,List} from 'antd'
 import {connect} from 'dva'
 import moment from 'moment'
 import styles from './BuyPower.less'
 import BuyPowerModal from "./BuyPowerModal";
 import QrCodeModal from "./QrCodeModal";
+import BuyCard from "./BuyCard";
 
 const BuyPower = ({dispatch, buyPower, loading}) => {
   const columns = [{
@@ -66,16 +67,28 @@ const BuyPower = ({dispatch, buyPower, loading}) => {
       })
     }
   };
+
+
   return (
     <div className={styles.myTable}>
-      <Table
-        bordered={true}
-        dataSource={buyPower.tableData}
-        loading={loading.models.buyPower}
-        columns={columns}
-        pagination={false}
-        rowKey={record => record.salt}/>
+      {/*<Table*/}
+        {/*bordered={true}*/}
+        {/*dataSource={buyPower.tableData}*/}
+        {/*loading={loading.models.buyPower}*/}
+        {/*columns={columns}*/}
+        {/*pagination={false}*/}
+        {/*rowKey={record => record.salt}/>*/}
       <QrCodeModal {...QrCodeProps}/>
+      <List
+        grid={{ gutter: 16, xs: 1, sm: 1, md: 1, lg: 1, xl: 2, xxl: 3 }}
+        dataSource={buyPower.tableData}
+        renderItem={item => (
+          <List.Item>
+           <BuyCard data={item} onOk={onOk} parameters={buyPower.parameters}/>
+          </List.Item>
+        )}
+      />
+
     </div>
   )
 };
