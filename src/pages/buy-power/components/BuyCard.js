@@ -7,7 +7,9 @@ import styles from './BuyCard.less'
 const BuyCard = ({data, parameters, onOk}) => {
   console.log('data', data);
   const headerStyle = {
-    background: 'linear-gradient(to right, #f9b78a , #f36e7b)'
+    background: 'linear-gradient(to right, #f9b78a , #f36e7b)',
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10
   };
 
 
@@ -24,8 +26,9 @@ const BuyCard = ({data, parameters, onOk}) => {
       title={<span style={{color: '#fff', fontSize: 22}}>算力产品</span>}
       bordered={false}
       headStyle={headerStyle}
-      bodyStyle={{background: '#262835', color: '#fff'}}
+      bodyStyle={{background: '#262835', color: '#fff',borderBottomLeftRadius:10,borderBottomRightRadius:10}}
       type={"inner"}
+      style={{borderRadius:12}}
     >
       <Row>
         <Col span={12}>
