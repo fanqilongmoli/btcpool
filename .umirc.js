@@ -5,7 +5,7 @@ export default {
   publicPath: "./",
   proxy: {
     "/api": {
-      "target": "http://localhost:8080/",
+      "target": "http://localhost:8888/",
       "changeOrigin": true,
       "pathRewrite": {"^/api": ""}
     }
