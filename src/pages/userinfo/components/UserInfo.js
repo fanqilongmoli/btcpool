@@ -23,7 +23,7 @@ class UserInfo extends React.PureComponent {
           <Divider dashed={true}/>
           <Row>
             <Col span={6}>当前算力</Col>
-            <Col span={6}> {userinfo.hash} H/s (现在)</Col>
+            <Col span={6}> {userinfo.hash} T/s (现在)</Col>
           </Row>
           <Divider dashed={true}/>
           <Row>

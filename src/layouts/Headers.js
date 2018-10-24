@@ -23,7 +23,7 @@ const Headers = ({location}) => {
     <div>
       <Row>
         <Col span={6}>
-          <span style={logoStyle}>Bitcoin.com蜂鸟科技</span>
+          <span style={logoStyle}>蜂鸟科技</span>
         </Col>
         <Col span={17}>
           <div style={{float:'right',marginRight:20}}>

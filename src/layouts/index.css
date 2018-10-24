@@ -13,3 +13,21 @@
   padding: 0 8px;
   flex: 1 0 auto;
 }
+
+.qrcode {
+  position: fixed;
+  bottom: 50px;
+  left: 14px;
+}
+
+.qrpic {
+  margin-left: 30px;
+  margin-top: 20px;
+  width: 85px;
+  height: 85px;
+  background: url(../assets/QRCode_ic.png);
+}
+
+.name {
+  color: rgba(255, 255, 255, 0.65)
+}

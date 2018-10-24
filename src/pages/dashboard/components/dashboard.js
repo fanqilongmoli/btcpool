@@ -31,7 +31,7 @@ const Dashboard = ({dispatch, dashboard}) => {
       <div style={{float: 'left'}} className={styles.clearfix}>
         <div className={styles.myCalc}>
           <div style={{fontSize: 22, color: '#fff', paddingTop: 30, paddingLeft: 30}}>我的算力 (BTC)</div>
-          <div style={{paddingTop: 10, paddingLeft: 30, fontSize: 16, color: '#fff'}}>{userState.hash} H/s (现在)</div>
+          <div style={{paddingTop: 10, paddingLeft: 30, fontSize: 16, color: '#fff'}}>{userState.hash} T/s (现在)</div>
         </div>
 
 
@@ -53,10 +53,10 @@ const Dashboard = ({dispatch, dashboard}) => {
       <div style={{float: 'right', marginLeft: 20}}>
 
         <div className={styles.ad1}>
-          <div className={styles.adb}>广告</div>
+          {/*<div className={styles.adb}>广告</div>*/}
         </div>
         <div className={styles.ad2}>
-          <div className={styles.adb}>广告</div>
+          {/*<div className={styles.adb}>广告</div>*/}
         </div>
 
       </div>
