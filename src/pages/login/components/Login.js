@@ -26,9 +26,9 @@ const Login = ({
         return
       }
       loginValue = values;
-      // dispatch({type: 'login/login', payload: loginValue}).then(value => {router.push('/dashboard')})
+      dispatch({type: 'login/login', payload: loginValue}).then(value => {router.push('/dashboard')})
 
-      recaptchaInstance.execute();
+      // recaptchaInstance.execute();
 
     })
   };
@@ -91,19 +91,19 @@ const Login = ({
         </div>
       </Form>
 
-      <Recaptcha
-        ref={e => recaptchaInstance = e}
-        sitekey={sitekey}
-        size="invisible"
-        render="onload"
-        verifyCallback={verifyCallback}
-        onloadCallback={callback}
-        expiredCallback={expiredCallback}
-        theme={'dark'}
-        tabindex={'0'}
+      {/*<Recaptcha*/}
+        {/*ref={e => recaptchaInstance = e}*/}
+        {/*sitekey={sitekey}*/}
+        {/*size="invisible"*/}
+        {/*render="onload"*/}
+        {/*verifyCallback={verifyCallback}*/}
+        {/*onloadCallback={callback}*/}
+        {/*expiredCallback={expiredCallback}*/}
+        {/*theme={'dark'}*/}
+        {/*tabindex={'0'}*/}
 
-        hl={''}
-      />
+        {/*hl={''}*/}
+      {/*/>*/}
     </div>
   )
 };
