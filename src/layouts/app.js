@@ -46,7 +46,7 @@ const App = ({dispatch, children, location, app}) => {
           <Headers/>
         </Header>
         <Layout style={{background: '#131720', marginTop: 64}}>
-          <Sider width={200}>
+          <Sider width={200} style={{height:'100vh'}}>
             <Menus {...menusProps}/>
           </Sider>
           <Content style={{padding: '24px', minHeight: 280}}>
