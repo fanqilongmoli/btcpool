@@ -1,10 +1,11 @@
 import React from 'react';
 import {Row, Col} from 'antd'
-import {DatePicker,Button} from 'antd';
+import {DatePicker, Button} from 'antd';
 import {connect} from 'dva'
 
 import Groupedcolumn from "./Groupedcolumn";
 import styles from './dashboard.less'
+import TopChart from "./TopChart";
 
 const {RangePicker} = DatePicker;
 
@@ -25,17 +26,20 @@ const Dashboard = ({dispatch, dashboard}) => {
       }
     })
   };
-
+  const topCharProps = {
+    hashList: userState.hashList
+  };
   return (
     <div style={{paddingTop: 20, width: 1154}}>
       <div style={{float: 'left'}} className={styles.clearfix}>
         <div className={styles.myCalc}>
-          <div style={{fontSize: 22, color: '#fff', paddingTop: 30, paddingLeft: 30}}>我的算力 (BTC)</div>
-          <div style={{paddingTop: 10, paddingLeft: 30, fontSize: 16, color: '#fff'}}>{userState.hash} T/s (现在)</div>
+          <TopChart {...topCharProps}/>
+          <div style={{fontSize: 22, color: '#fff', top: 30, left: 30, position: 'absolute'}}>我的算力 (BTC)</div>
+          <div style={{top: 70, left: 30, fontSize: 16, color: '#fff', position: 'absolute'}}>{userState.hash} T/s (现在)
+          </div>
         </div>
 
-
-        <div style={{background: '#262835', marginTop: 10, marginBottom: 10, width: 756,borderRadius:10}}>
+        <div style={{background: '#262835', marginTop: 10, marginBottom: 10, width: 756, borderRadius: 10}}>
           <div style={{fontSize: 22, color: '#fff', paddingTop: 30, paddingLeft: 30}}>我的收入(BTC)</div>
           <div style={{marginTop: 20, marginLeft: 30}}>
             <RangePicker
